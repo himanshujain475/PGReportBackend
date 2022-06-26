@@ -39,9 +39,16 @@ public class AuthController {
         UserBO user = new UserBO();
         user.setUserName(userName);
         user.setPassword(password);
-        userBOService.addUser(user);
+       boolean checker= userBOService.addUser(user);
 
-        return  ResponseEntity.ok(new AuthenticationResponse("valid for "+userName));
+       if(checker == true){
+           return  ResponseEntity.ok(new AuthenticationResponse("valid for "+userName));
+       }
+       else{
+           return  ResponseEntity.ok(new AuthenticationResponse("User Already existed "+userName));
+       }
+
+
     }
 
 

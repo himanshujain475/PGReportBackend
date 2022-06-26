@@ -2,7 +2,7 @@ package com.example.PgReport.User;
 
 public interface UserBOService {
 
-    void addUser(UserBO user);
+    boolean addUser(UserBO user);
 
     UserBO findByUserName(String user);
 }

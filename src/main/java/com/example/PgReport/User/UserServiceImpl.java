@@ -9,8 +9,16 @@ public class UserServiceImpl implements UserBOService{
     @Autowired
     private UserRepo userRepo;
     @Override
-    public void addUser(UserBO user) {
-        userRepo.addUser(user);
+    public boolean addUser(UserBO user) {
+        UserBO userBO =userRepo.findByUserName(user.getUserName());
+        if(userBO == null){
+            userRepo.addUser(user);
+            return true;
+        }
+        else{
+            return false;
+        }
+
     }
     @Override
     public UserBO findByUserName(String userName){
