@@ -33,41 +33,58 @@ public class AuthController {
 
     @PostMapping("/subs")
     private ResponseEntity<?> subscribeClient(@RequestBody AuthenticationRequest authenticationRequest){
-        String userName = authenticationRequest.getUserName();
-        String password = authenticationRequest.getPassword();
+        Integer userName = authenticationRequest.getMobile();
+        Integer password = authenticationRequest.getPin();
 
         UserBO user = new UserBO();
-        user.setUserName(userName);
-        user.setPassword(password);
+        user.setMobile(user.getMobile());
+        user.setPin(user.getPin());
        boolean checker= userBOService.addUser(user);
 
        if(checker == true){
-           return  ResponseEntity.ok(new AuthenticationResponse("valid for "+userName));
+           return  ResponseEntity.ok(new AuthenticationResponse("200","valid for "+userName));
        }
        else{
-           return  ResponseEntity.ok(new AuthenticationResponse("User Already existed "+userName));
+           return  ResponseEntity.ok(new AuthenticationResponse("400","User Already existed "+userName));
        }
 
 
     }
 
+    @PostMapping("/userPresent")
+    private ResponseEntity<?> userPresent(@RequestBody AuthenticationRequest authenticationRequest){
+        int mobile = authenticationRequest.getMobile();
+
+        UserBO userBO  = userBOService.findByMobile(mobile);
+
+        if(userBO != null){
+            return  ResponseEntity.ok(new AuthenticationResponse("400","User Already existed "+mobile));
+        }
+        else{
+            return  ResponseEntity.ok(new AuthenticationResponse("200","User Does not exits"));
+        }
+
+
+    }
+
+
 
     @PostMapping("/auth")
     private ResponseEntity<?> authClient(@RequestBody AuthenticationRequest authenticationRequest){
-        String userName = authenticationRequest.getUserName();
-        String password = authenticationRequest.getPassword();
+        int mobile = authenticationRequest.getMobile();
+        int pin = authenticationRequest.getPin();
         try{
-            authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(userName,password));
+            authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(mobile,pin));
 
         }
         catch (Exception e){
-            return  ResponseEntity.ok(new AuthenticationResponse("Exception for "+userName));
+            return  ResponseEntity.ok(new AuthenticationResponse("400","Exception for "+mobile));
         }
 
-        UserDetails loadedUser = userService.loadUserByUsername(userName);
+        UserDetails loadedUser = userService.loadUserByUsername(Integer.toString(mobile));
 
         String generatedToken = jwtUtils.generateToken(loadedUser);
 
-        return  ResponseEntity.ok(new AuthenticationResponse(generatedToken));
+        return  ResponseEntity.ok(new AuthenticationResponse("200",generatedToken));
     }
 }

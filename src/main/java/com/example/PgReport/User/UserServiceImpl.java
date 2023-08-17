@@ -10,7 +10,7 @@ public class UserServiceImpl implements UserBOService{
     private UserRepo userRepo;
     @Override
     public boolean addUser(UserBO user) {
-        UserBO userBO =userRepo.findByUserName(user.getUserName());
+        UserBO userBO =userRepo.findByMobile(user.getMobile());
         if(userBO == null){
             userRepo.addUser(user);
             return true;
@@ -21,7 +21,7 @@ public class UserServiceImpl implements UserBOService{
 
     }
     @Override
-    public UserBO findByUserName(String userName){
-       return userRepo.findByUserName(userName);
+    public UserBO findByMobile(int mobile){
+       return userRepo.findByMobile(mobile);
     }
 }

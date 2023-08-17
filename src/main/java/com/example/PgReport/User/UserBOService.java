@@ -4,5 +4,6 @@ public interface UserBOService {
 
     boolean addUser(UserBO user);
 
-    UserBO findByUserName(String user);
+    UserBO findByMobile(int mobile);
+
 }

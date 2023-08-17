@@ -9,7 +9,10 @@ public class AuthenticationResponse {
 
     private String response;
 
-    public AuthenticationResponse(String response) {
+    private String status;
+
+    public AuthenticationResponse(String status,String response) {
         this.response = response;
+        this.status=  status;
     }
 }

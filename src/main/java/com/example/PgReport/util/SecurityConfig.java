@@ -40,14 +40,14 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         // http builder configurations for authorize requests and form login (see below)
         http
                 .csrf().disable()
-                .authorizeRequests().antMatchers("/subs","/auth")
+                .authorizeRequests().antMatchers("/subs","/auth","/userPresent")
               .permitAll()
                 .anyRequest().authenticated()
                 .and().
                 // make sure we use stateless session; session won't be used to
                 // store user's state.
                         exceptionHandling().authenticationEntryPoint(jwtAuthenticationEntryPoint).and().sessionManagement()
-                .sessionCreationPolicy(SessionCreationPolicy.STATELESS);;
+                .sessionCreationPolicy(SessionCreationPolicy.STATELESS);
 
        http.addFilterBefore(jwtFilterRequest, UsernamePasswordAuthenticationFilter.class);
     }

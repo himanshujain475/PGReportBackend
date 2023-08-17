@@ -16,8 +16,8 @@ public class UserRepoImpl implements UserRepo{
     }
 
     @Override
-    public UserBO findByUserName(String userName){
-        Query query = Query.query(Criteria.where("userName").is(userName));
+    public UserBO findByMobile(int mobile){
+        Query query = Query.query(Criteria.where("mobile").is(mobile));
         return mongoTemplate.findOne(query,UserBO.class);
     }
 }

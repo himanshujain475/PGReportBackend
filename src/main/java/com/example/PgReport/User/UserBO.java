@@ -25,14 +25,15 @@ public class UserBO {
 
     private String userName;
 
-    private String password;
+    private int mobile;
+
+    private int pin;
     private String roomNo;
 
     private AddressBO address;
 
     private String occupation;
 
-    private String mobile;
 
     private String joiningDate;
 
