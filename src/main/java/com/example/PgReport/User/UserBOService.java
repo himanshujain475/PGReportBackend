@@ -4,6 +4,12 @@ public interface UserBOService {
 
     boolean addUser(UserBO user);
 
-    UserBO findByMobile(int mobile);
+    UserBO findByMobile(Long mobile);
+
+    void addUserDetails(UserDetailsBO user);
+
+    UserDetailsBO getUserDetails(Long mobile);
+
+
 
 }

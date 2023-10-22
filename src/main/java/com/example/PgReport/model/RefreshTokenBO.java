@@ -1,40 +1,32 @@
-package com.example.PgReport.User;
-
+package com.example.PgReport.model;
 
 import com.example.PgReport.Utility.IdGenerator;
-import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.annotation.Transient;
 import org.springframework.data.mongodb.core.mapping.Document;
 
+import java.time.Instant;
+
+
 @Getter
 @Setter
-@Data
-@Document(collection = "User")
+@Document(collection = "RefreshToken")
+public class RefreshTokenBO {
 
-public class UserBO {
     @Transient
     private static IdGenerator idg = new IdGenerator();
 
     @Id
     private String _id = idg.getId();
 
-    private String salt;
-
     private Long mobile;
 
-    private String pin;
 
-    private boolean isActive;
+    private String token;
 
-
-    public UserBO() {
-
-    }
-
-
+    private Instant expiryDate;
 
 
 }

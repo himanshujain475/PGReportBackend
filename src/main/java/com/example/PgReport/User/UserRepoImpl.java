@@ -16,8 +16,20 @@ public class UserRepoImpl implements UserRepo{
     }
 
     @Override
-    public UserBO findByMobile(int mobile){
+    public UserBO findByMobile(Long mobile){
         Query query = Query.query(Criteria.where("mobile").is(mobile));
-        return mongoTemplate.findOne(query,UserBO.class);
+        UserBO userBO =mongoTemplate.findOne(query,UserBO.class);
+        return userBO;
+    }
+
+    @Override
+    public void addUserDetails(UserDetailsBO userDetailsBO) {
+        mongoTemplate.insert(userDetailsBO);
+    }
+
+    @Override
+    public UserDetailsBO getUserDetails(Long mobile) {
+        Query query = Query.query(Criteria.where("mobile").is(mobile));
+        return mongoTemplate.findOne(query,UserDetailsBO.class);
     }
 }

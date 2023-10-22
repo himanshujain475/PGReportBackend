@@ -6,10 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 public class UserController {
@@ -17,11 +14,16 @@ public class UserController {
     @Autowired
     private UserBOService userService;
 
-    @PostMapping("/addUser1")
-    public ResponseEntity<?> addPracticeUser(@RequestBody UserTO userTo){
+    @PostMapping("/updateUserDetails")
+    public ResponseEntity<?> updateUser(@RequestBody UserDetailsBO userDetailsBO){
 
-        UserBO userRepo = new UserBO(userTo.getName(),userTo.getRoomNo());
-        userService.addUser(userRepo);
-        return new ResponseEntity<>(new ResponseBody(200,"Success","User added Succesfully",userRepo), HttpStatus.OK);
+          userService.addUserDetails(userDetailsBO);
+        return new ResponseEntity<>(new ResponseBody(200,"Success","User added Succesfully",null), HttpStatus.OK);
+    }
+
+    @GetMapping("/getUserDetails")
+    public ResponseEntity<?> getUserDetails(@RequestParam String mobile){
+
+        return new ResponseEntity<>(new ResponseBody(200,"Success","User fetch Successfully",userService.getUserDetails(Long.parseLong(mobile))), HttpStatus.OK);
     }
 }

@@ -8,6 +8,8 @@ import lombok.Setter;
 @Setter
 public class AuthenticationRequest {
 
-    private  int mobile;
-    private int pin;
+    private  Long mobile;
+    private String pin;
+
+    private String salt;
 }

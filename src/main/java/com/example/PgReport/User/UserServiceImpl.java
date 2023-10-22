@@ -21,7 +21,18 @@ public class UserServiceImpl implements UserBOService{
 
     }
     @Override
-    public UserBO findByMobile(int mobile){
+    public UserBO findByMobile(Long mobile){
        return userRepo.findByMobile(mobile);
+    }
+
+    @Override
+    public void addUserDetails(UserDetailsBO user) {
+
+         userRepo.addUserDetails(user);
+    }
+
+    @Override
+    public UserDetailsBO getUserDetails(Long mobile) {
+        return userRepo.getUserDetails(mobile);
     }
 }

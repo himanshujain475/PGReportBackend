@@ -10,6 +10,17 @@ import lombok.Setter;
 public class UserTO {
 
     private String name;
-    private String roomNo;
+    private String state;
+    private String city;
+    private String zip;
+    private String occupation;
+    private String fatherName;
+    private String motherName;
+    private String joiningDate;
+    private String address;
+    private double securityAmount;
+    private int roomNo;
+    private Long mobile;
+    private String occupancy;
 
 }

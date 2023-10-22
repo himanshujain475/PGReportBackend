@@ -19,13 +19,13 @@ public class UserService implements UserDetailsService {
 
     @Override
     public UserDetails loadUserByUsername(String mobile) throws UsernameNotFoundException {
-        UserBO userBO = userService.findByMobile(Integer.parseInt(mobile));
+        UserBO userBO = userService.findByMobile(Long.parseLong(mobile));
         if(userBO == null) return  null;
 
-        String userName = userBO.getUserName();
-        int  pin =  userBO.getPin();
+        String userName = userBO.getMobile().toString();
+        String pin =  userBO.getPin().toString();
         //int mobile = userBO.getMobile();
-        return new User(Integer.toString(userBO.getMobile()),Integer.toString(pin),new ArrayList<>());
+        return new User(Long.toString(userBO.getMobile()),pin,new ArrayList<>());
     }
 
 
